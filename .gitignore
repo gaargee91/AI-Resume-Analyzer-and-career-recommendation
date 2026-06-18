@@ -1,0 +1,9 @@
+# .gitignore
+resume_analyzer.db
+__pycache__/
+*.pyc
+.env
+.venv/
+env/
+venv/
+
