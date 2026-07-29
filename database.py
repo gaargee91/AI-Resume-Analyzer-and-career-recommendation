@@ -1,60 +1,40 @@
 import sqlite3
-import bcrypt
-def get_connection():
-    connection = sqlite3.connect('resume_analyzer.db', check_same_thread=False)
-    return connection
 
-def create_tables():
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users(
+# 1. Connect to the SQLite file
+conn = sqlite3.connect("careerlens.db", check_same_thread=False)
+cursor = conn.cursor()
+
+# 2. Create the Users table
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL , 
+        name TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
-        role TEXT NOT NULL
-        )''')
+        role TEXT NOT NULL,
+        is_verified INTEGER DEFAULT 0,
+        verification_code TEXT,
+        reset_token TEXT   
+    )
+''')
 
-    connection.commit()
-    connection.close()
+# Create the Resume Details table 
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS resume_details (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_email TEXT NOT NULL,
+        phone TEXT,
+        resume_email TEXT,
+        linkedin_url TEXT,
+        address TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_email) REFERENCES users (email)
+    )
+''')
 
-def hash_password(password):
-    scrambled = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    return scrambled.decode('utf-8')
-    
-def verify_password(password, scrambled_hash):
-    return bcrypt.checkpw(password.encode('utf-8'), scrambled_hash.encode('utf-8'))
+# 3. Save the changes to the file
+conn.commit()
 
-def add_user(username , password , role="applicant"):
-    connection= get_connection()
-    cursor =connection.cursor()
-
-    try:
-        hashed_pw = hash_password(password)
-        cursor.execute('INSERT INTO users(username , password_hash, role) VALUES (? , ? , ?)', (username ,hashed_pw, role))
-        connection.commit()
-        return True
-
-    except sqlite3.IntegrityError:
-        return False
-
-    finally:
-        connection.close()
-
-def authentication_user(username , password):
-    connection = get_connection()
-    cursor = connection.cursor()
-
-    cursor.execute("SELECT password_hash, role FROM users WHERE username=? ", (username,))
-    
-    user_record = cursor.fetchone()
-    connection.close()
-
-    if user_record :
-        stored_hash = user_record[0]
-        role = user_record[1]
-        if verify_password(password , stored_hash):
-            return role
-    return None
-
-    
+# We will use this tiny helper function later to talk to the database
+def get_db_connection():
+    return conn, cursor

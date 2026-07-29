@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareerLens AI</title>
+
+    <!-- THE DESIGN (CSS): All colors, sizes, and layout rules are isolated up here! -->
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f9;
+        }
+
+        /* Text Colors and Sizes */
+        .main-title {
+            color: #2c3e50;
+            font-size: 3rem;
+        }
+
+        .sub-title {
+            color: #7f8c8d;
+        }
+
+        .card-title {
+            color: #2c3e50;
+        }
+
+        .card-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .help-text {
+            color: #bdc3c7;
+            font-size: 0.85rem;
+            margin-top: 35px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        /* Layout */
+        .features-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        /* The White Boxes */
+        .form-box {
+            width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            border-top: 5px solid #667eea;
+        }
+
+        .form-box-alt {
+            border-top: 5px solid #27ae60;
+        }
+
+        /* Inputs and Buttons */
+        .input-field {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-blue {
+            background-color: #667eea;
+        }
+
+        .btn-green {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- THE STRUCTURE (HTML): 100% clean, no messy inline styles! -->
+    <h1 class="main-title">🔍 CareerLens AI</h1>
+    <h3 class="sub-title">Choose Your AI Career Path</h3>
+
+    <div class="features-container">
+
+        <!-- FEATURE 1: Analyze a Specific Job -->
+        <div class="form-box">
+            <h2 class="card-title">🎯 Target a Specific Job</h2>
+            <p class="card-desc">Match your resume against a job description.</p>
+
+            <form action="/analyze-job" method="post" enctype="multipart/form-data">
+                <label><b>1. Upload Resume (PDF)</b></label>
+                <input type="file" name="resume" accept=".pdf" required class="input-field">
+
+                <label><b>2. Paste Job Description</b></label>
+                <textarea name="job_description" rows="4" required placeholder="Type here..."
+                    class="input-field"></textarea>
+
+                <button type="submit" class="btn btn-blue">Analyze Job Match 🚀</button>
+            </form>
+        </div>
+
+        <!-- FEATURE 2: Discover Best Roles -->
+        <div class="form-box form-box-alt">
+            <h2 class="card-title">🧭 Discover Best Roles</h2>
+            <p class="card-desc">Let AI recommend the perfect jobs for your skills.</p>
+
+            <form action="/discover-roles" method="post" enctype="multipart/form-data">
+                <label><b>1. Upload Resume (PDF)</b></label>
+                <input type="file" name="resume" accept=".pdf" required class="input-field">
+
+                <!-- Notice we DO NOT need a Job Description text box here! -->
+                <p class="help-text">No job description needed. The AI will analyze your skills and find your perfect
+                    role.</p>
+
+                <button type="submit" class="btn btn-green">Discover My Paths 🌟</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- THE LOGOUT BUTTON & PROFILE BADGE -->
+    <div style="position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 15px;">
+
+        <div style="text-align: right;">
+            <div style="font-weight: bold; color: #2c3e50; margin-bottom: 3px;">Welcome, {{ user_name }}!</div>
+            <span
+                style="background-color: #27ae60; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                {{ user_role }}
+            </span>
+        </div>
+
+        <a href="/logout"
+            style="text-decoration: none; padding: 10px 20px; background-color: #e74c3c; color: white; border-radius: 5px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            Logout
+        </a>
+    </div>
+
+</body>
+
+</html>

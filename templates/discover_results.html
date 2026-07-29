@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareerLens AI - Role Discovery</title>
+
+    <!-- 1. THE TOOLS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- 2. THE DESIGN (CSS) -->
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Changed border to green for Feature 2! */
+        .card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            border-top: 5px solid #27ae60;
+        }
+
+        .header-box {
+            background-color: #27ae60;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .roles-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-left: 5px solid #27ae60;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Button Styles */
+        .button-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-blue {
+            background-color: #2c3e50;
+        }
+
+        .btn-green {
+            background-color: #27ae60;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🌟 CareerLens AI Role Discovery</h1>
+
+    <!-- 3. THE STRUCTURE (HTML) -->
+    <div class="card" id="report-card">
+
+        <div class="header-box">
+            <h2>Your Best Career Paths</h2>
+            <p style="margin: 0;">Based purely on the skills extracted from your resume.</p>
+        </div>
+
+        <h3>✅ Skills Found in Your Resume:</h3>
+        <p>{{ skills_found | join(', ') }}</p>
+
+        <h3>🧭 Top 3 Recommended Roles:</h3>
+        <div class="roles-box">{{ roles | safe }}</div>
+
+        <!-- The Buttons -->
+        <div class="button-area" id="buttons">
+            <a href="/applicant" class="btn btn-blue">Try Another Resume</a>
+            <button onclick="downloadPDF()" class="btn btn-green">💾 Download Report</button>
+        </div>
+
+    </div>
+
+    <!-- 4. THE LOGIC (JavaScript) -->
+    <script>
+        function downloadPDF() {
+            var report = document.getElementById('report-card');
+            var buttons = document.getElementById('buttons');
+
+            buttons.style.display = 'none';
+
+            html2pdf().from(report).save('Career_Discovery_Report.pdf').then(function () {
+                buttons.style.display = 'block';
+            });
+        }
+    </script>
+
+</body>
+
+</html>

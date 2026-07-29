@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareerLens AI - Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background-color: #f4f4f9;
+        }
+
+        .main-title {
+            color: #2c3e50;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .sub-title {
+            color: #7f8c8d;
+            margin-bottom: 50px;
+        }
+
+        .role-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* The giant role selection buttons */
+        .role-card {
+            width: 300px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            border: 2px solid #667eea;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .role-desc {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="main-title">🔍 CareerLens AI</h1>
+    <h3 class="sub-title">Welcome. Please select your portal:</h3>
+
+    <div class="role-container">
+
+        <!-- Button to go to the Applicant Page -->
+        <a href="/applicant" class="role-card">
+            <div class="icon">🎓</div>
+            <div class="role-title">I am an Applicant</div>
+            <div class="role-desc">Analyze your resume, find your missing skills, and discover your perfect career path.
+            </div>
+        </a>
+
+        <!-- Button to go to the Recruiter Page -->
+        <a href="/recruiter" class="role-card">
+            <div class="icon">🏢</div>
+            <div class="role-title">I am a Recruiter</div>
+            <div class="role-desc">Upload multiple resumes and let AI rank the top candidates for your job opening.
+            </div>
+        </a>
+
+    </div>
+
+</body>
+
+</html>

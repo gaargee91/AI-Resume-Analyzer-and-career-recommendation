@@ -1,0 +1,174 @@
+/* 1. GLOBAL STYLES (The Canvas)*/
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    /* The next 3 lines perfectly center everything on the screen! */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 2. REUSABLE BOXES (The Cards)*/
+
+.card {
+    background-color: white;
+    width: 400px;
+    padding: 40px;
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Soft floating shadow */
+    text-align: center;
+}
+
+/*  3. REUSABLE TEXT STYLES*/
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* 4. REUSABLE INPUTS & BUTTONS*/
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Stops the box from poking out the sides */
+    font-size: 1rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+/* Now we can paint any button blue or green just by using these names! */
+.btn-blue {
+    background-color: #667eea;
+}
+
+.btn-green {
+    background-color: #27ae60;
+}
+
+/* 5. MAKE LABELS & PARAGRAPHS SMALLER*/
+
+label b,
+p {
+    font-size: 0.85rem;
+    /* This shrinks the text by 15% */
+}
+
+/*6. RECRUITER DASHBOARD */
+
+.dashboard-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo-text {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #7f8c8d;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background-color: #e2f0d9;
+    color: #27ae60;
+}
+
+.nav-links a.logout-btn {
+    margin-top: auto;
+    color: #e74c3c;
+    background-color: #fcebeb;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.file-drop-area {
+    border: 2px dashed #ccc;
+    padding: 40px;
+    text-align: center;
+    background: #fdfdfd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.file-drop-area:hover {
+    border-color: #3498db;
+    background: #f0f8ff;
+}
+
+.file-drop-area p {
+    color: #7f8c8d;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Fix the inputs in the dashboard so they stretch fully */
+.dashboard-container .input-field {
+    width: 100%;
+}

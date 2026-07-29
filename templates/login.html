@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareerLens AI - Login</title>
+    <!-- Connect our Global CSS! -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="card" style="text-align: left; width: 400px;">
+        <h2 class="title" style="text-align: center; margin-bottom: 20px;">🔐 Welcome , login to your account</h2>
+
+        <!-- This will magically appear if they type the wrong password! -->
+        {% if error %}
+        <div
+            style="background-color: #ffcccc; color: red; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px;">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/login" method="post" id="loginForm">
+            <label><b>Email Address</b></label>
+            <input type="email" name="email" required class="input-field" placeholder="you@example.com">
+
+            <label><b>Password</b></label>
+            <div style="position: relative;">
+                <input type="password" id="loginPass" name="password" required class="input-field"
+                    placeholder="••••••••">
+                <!-- We can reuse our Lock Toggle from main.js! -->
+                <button type="button" id="loginLock" onclick="toggleEye('loginPass', 'loginLock')"
+                    style="position: absolute; right: 10px; top: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer;">🔒</button>
+            </div>
+
+            <!-- NEW: The Forgot Password Link -->
+            <p style="text-align: right; margin: 5px 0 15px 0;">
+                <a href="/forgot-password"
+                    style="font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold;">Forgot
+                    Password?</a>
+            </p>
+
+            <!-- Notice the onclick here that triggers the Loading effect -->
+            <button type="submit" id="loginBtn" class="btn btn-blue" onclick="showLoading()">Login</button>
+
+        </form>
+
+        <p style="text-align: center; margin-top: 20px;">
+            Don't have an account? <a href="/signup"
+                style="color: #667eea; font-weight: bold; text-decoration: none;">Create Account</a>
+        </p>
+
+    </div>
+
+    <!-- Connect our Javascript -->
+    <script src="/static/main.js"></script>
+
+    <!-- The Custom Loading Logic -->
+    <script>
+        function showLoading() {
+            var btn = document.getElementById("loginBtn");
+            btn.innerHTML = "Logging in... ⏳";
+            btn.style.backgroundColor = "#7f8c8d"; // Turns gray to look "busy"
+        }
+    </script>
+
+</body>
+
+</html>

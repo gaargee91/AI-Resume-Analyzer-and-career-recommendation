@@ -1,9 +1,8 @@
-# .gitignore
-resume_analyzer.db
 __pycache__/
 *.pyc
+careerlens.db
+temp_*.pdf
+*.log
 .env
 .venv/
-env/
 venv/
-

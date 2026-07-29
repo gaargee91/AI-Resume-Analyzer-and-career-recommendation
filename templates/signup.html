@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareerLens AI - Signup</title>
+    <!-- Connect our Global CSS! -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="card" style="text-align: left; width: 450px;">
+        <h2 class="title" style="text-align: center; margin-bottom: 20px;">🚀 Create Account</h2>
+        <!-- This will magically appear if Python sends an error message! -->
+        {% if error %}
+        <div
+            style="background-color: #ffcccc; color: red; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 15px;">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/signup" method="post">
+            <label><b>Full Name</b></label>
+            <input type="text" name="name" required class="input-field" placeholder="Enter your name..">
+
+            <label><b>Email Address</b></label>
+            <input type="email" name="email" required class="input-field" placeholder="you@example.com">
+
+            <label><b>Password</b></label>
+            <div style="position: relative;">
+                <!-- Notice the onkeyup event! It runs our JS function on every keystroke -->
+                <input type="password" id="passInput" name="password" required class="input-field"
+                    placeholder="••••••••" onkeyup="checkPasswordStrength()">
+
+                <!-- The Eye Toggle Button -->
+                <button type="button" id="lockIcon" onclick="toggleEye('passInput', 'lockIcon')"
+                    style="position: absolute; right: 10px; top: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer;">🔒</button>
+            </div>
+
+            <!-- The Live Password Checklist -->
+            <div
+                style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 0.9rem;">
+                <p style="margin: 5px 0;"><b>Password Strength:</b></p>
+                <div id="check-length" style="color: red;">❌ 8+ characters</div>
+                <div id="check-upper" style="color: red;">❌ One uppercase</div>
+                <div id="check-number" style="color: red;">❌ One number</div>
+            </div>
+
+            <label><b>Confirm Password</b></label>
+            <input type="password" id="confirmInput" name="confirm_password" required class="input-field"
+                placeholder="••••••••">
+
+            <label><b>Select Your Role</b></label>
+            <select name="role" class="input-field" required>
+                <option value="applicant">Applicant</option>
+                <option value="recruiter">Recruiter</option>
+            </select>
+
+            <button type="submit" class="btn btn-blue">Create Account</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 20px;">
+            Already have an account? <a href="/login"
+                style="color: #667eea; font-weight: bold; text-decoration: none;">Login</a>
+        </p>
+
+    </div>
+
+    <!-- Connect our new Javascript file at the bottom! -->
+    <script src="/static/main.js"></script>
+
+</body>
+
+</html>

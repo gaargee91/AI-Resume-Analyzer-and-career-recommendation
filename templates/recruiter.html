@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard | CareerLens</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <!-- Main Content -->
+        <main class="main-content" style="display: flex; flex-direction: column; align-items: center;">
+            <header class="dashboard-header" style="text-align: center; margin-bottom: 30px;">
+                <h1>Recruiter Command Center</h1>
+                <p>Upload multiple resumes and let the AI rank the best candidates.</p>
+            </header>
+
+            <section class="action-section">
+                <div class="card">
+                    <h2>AI PDF Ranker</h2>
+                    <form action="/rank-resumes" method="post" enctype="multipart/form-data" class="upload-form">
+
+                        <label class="form-label">Target Job Description</label>
+                        <textarea name="job_description" class="input-field" rows="4"
+                            placeholder="Paste the exact job description here..." required></textarea>
+
+                        <label class="form-label">Upload Resumes (Up to 15 PDFs)</label>
+                        <div class="file-drop-area">
+                            <input type="file" name="resumes" accept=".pdf" multiple required>
+                            <p>Drag & Drop PDFs here, or click to browse</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-blue">Rank Candidates 🚀</button>
+                    </form>
+                </div>
+            </section>
+
+            {% if rankings %}
+            <section class="results-section">
+                <h2>Top Candidates</h2>
+                <div class="ranking-list" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                    {% for candidate in rankings %}
+                    <div class="card rank-card"
+                        style="display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #3498db;">
+                        <div class="rank-badge"
+                            style="background: #3498db; color: white; padding: 10px 15px; border-radius: 5px; font-weight: bold;">
+                            #{{ loop.index }}
+                        </div>
+                        <div class="candidate-details" style="flex-grow: 1; margin-left: 20px;">
+                            <h3 style="margin: 0; color: #2c3e50;">{{ candidate.filename }}</h3>
+                            <p style="margin: 5px 0 0 0; color: #7f8c8d;"><strong>Phone:</strong> {{ candidate.phone if
+                                candidate.phone else "Not Found" }}</p>
+                            <p style="margin: 2px 0 0 0; color: #7f8c8d;"><strong>Email:</strong> {{ candidate.email if
+                                candidate.email else "Not Found" }}</p>
+                            <p style="margin: 2px 0 0 0; color: #7f8c8d;"><strong>LinkedIn:</strong> {{
+                                candidate.linkedin if candidate.linkedin else "Not Found" }}</p>
+                            <p style="margin: 2px 0 0 0; color: #7f8c8d;"><strong>Location:</strong> {{
+                                candidate.address if candidate.address else "Not Found" }}</p>
+
+                        </div>
+                        <div class="score-circle" style="text-align: center;">
+                            <span class="score-number"
+                                style="display: block; font-size: 24px; font-weight: bold; color: #27ae60;">{{
+                                candidate.score }}%</span>
+                            <span class="score-label"
+                                style="font-size: 12px; color: #7f8c8d; text-transform: uppercase;">Match</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+        </main>
+    </div>
+    <!-- THE LOGOUT BUTTON & PROFILE BADGE -->
+    <div style="position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 15px;">
+
+        <div style="text-align: right;">
+            <div style="font-weight: bold; color: #2c3e50; margin-bottom: 3px;">Welcome, {{ user_name }}!</div>
+            <span
+                style="background-color: #3498db; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                {{ user_role }}
+            </span>
+        </div>
+
+        <a href="/logout"
+            style="text-decoration: none; padding: 10px 20px; background-color: #e74c3c; color: white; border-radius: 5px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            Logout
+        </a>
+    </div>
+
+</body>
+
+</html>

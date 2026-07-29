@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Email</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="card" style="text-align: center; width: 400px;">
+        <h2 class="title">📧 Check Your Email</h2>
+        <p>We just sent a secret 6-digit code to your email address.</p>
+
+        <!-- This will show up if they type the wrong code -->
+        {% if error %}
+        <div style="background-color: #ffcccc; color: red; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/verify" method="post">
+            <!-- We hide the email so Python remembers who is verifying! -->
+            <input type="hidden" name="email" value="{{ email }}">
+
+            <input type="text" name="code" required class="input-field" placeholder="123456"
+                style="text-align: center; font-size: 1.5rem; letter-spacing: 5px;" maxlength="6">
+
+            <button type="submit" class="btn btn-blue">Verify Account</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
